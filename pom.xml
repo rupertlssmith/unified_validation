@@ -10,6 +10,10 @@
 
     <name>Unified Validation</name>
 
+    <properties>
+        <jalopy.maven.plugin.version>1.9.4-250</jalopy.maven.plugin.version>
+    </properties>
+
     <dependencies>
 
         <dependency>
@@ -75,6 +79,21 @@
                         <showDeprecation>true</showDeprecation>
                     </configuration>
                 </plugin>                
+
+                <!-- For source code beautification. -->
+                <plugin>
+                    <groupId>triemax</groupId>
+                    <artifactId>jalopy-maven</artifactId>
+                    <version>${jalopy.maven.plugin.version}</version>
+                    <configuration>
+                        <profile>sun</profile>
+                        <sources>
+                            <source>${basedir}/src/main</source>
+                            <source>${basedir}/src/unittests</source>
+                        </sources>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
