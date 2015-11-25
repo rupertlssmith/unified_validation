@@ -17,6 +17,7 @@ import javax.validation.metadata.PropertyDescriptor;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.hibernate.validator.constraints.Length;
+
 import com.thesett.util.validation.model.ConstraintBuilder;
 import com.thesett.util.validation.model.JsonSchema;
 import com.thesett.util.validation.model.PropertyBuilder;

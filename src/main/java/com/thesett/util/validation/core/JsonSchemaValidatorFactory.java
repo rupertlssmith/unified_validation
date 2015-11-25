@@ -6,6 +6,7 @@ import javax.validation.ValidatorFactory;
 
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.HibernateValidatorConfiguration;
+
 import com.thesett.util.validation.model.JsonSchema;
 
 /**

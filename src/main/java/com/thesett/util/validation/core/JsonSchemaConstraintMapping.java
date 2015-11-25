@@ -18,6 +18,7 @@ import org.hibernate.validator.cfg.defs.LengthDef;
 import org.hibernate.validator.cfg.defs.NotNullDef;
 import org.hibernate.validator.cfg.defs.PatternDef;
 import org.hibernate.validator.internal.cfg.DefaultConstraintMapping;
+
 import com.thesett.util.validation.model.JsonSchema;
 import com.thesett.util.validation.model.SchemaType;
 
