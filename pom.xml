@@ -14,6 +14,19 @@
         <jalopy.maven.plugin.version>1.9.4-250</jalopy.maven.plugin.version>
     </properties>
 
+    <!--
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    -->
+    
     <distributionManagement>
         <repository>
             <id>releases</id>
@@ -79,6 +92,16 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <configuration>
+                        <includes>
+                            <include>com.thesett:*</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
