@@ -7,11 +7,10 @@ The following capabilities are addressed:
 
 * A json-schema can be converted into a JSR303 Validator.
 * Validations specified in json-schema can be overlayed on top of validations already defined with JSR303 annotations, XML configuration or using Hibernates programmatic API to specify validations.
-
-The following capabilities will soon be addressed:
-
 * Multiple json-schemas can be stacked together to produce a single validation.
 * A Bean Validation configuration can be converted into a json-schema.
+
+The goal is to be able to build a validation from a combination of JSR303 annotations and json-schemas, stack those together to produce a complete validation and then to be able to check that validation using either JSR303, or a json-schema validator.
 
 ### Build it
 
