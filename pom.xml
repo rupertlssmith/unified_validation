@@ -35,8 +35,9 @@
         <url>https://github.com/rupertlssmith/unified_validation.git</url>
     </scm>
     
-    <properties>
+    <properties>        
         <jalopy.maven.plugin.version>1.9.4-250</jalopy.maven.plugin.version>
+        <maven.javadoc.plugin.version>2.10.4</maven.javadoc.plugin.version>
     </properties>
 
     <!--
@@ -126,6 +127,12 @@
                         </includes>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven.javadoc.plugin.version}</version>
+                </plugin>                
                 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -179,6 +186,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${maven.javadoc.plugin.version}</version>                        
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
