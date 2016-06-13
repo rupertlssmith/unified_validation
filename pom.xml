@@ -7,9 +7,34 @@
     <groupId>com.thesett.validation</groupId>
     <artifactId>unified-validation</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
     <name>Unified Validation</name>
 
+    <description>Unifying JSR303 and json-schema validation.</description>
+    <url>https://github.com/rupertlssmith/unified_validation</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Rupert Smith</name>
+            <id>rupert</id>
+            <email>rupertgithub@badgerhouse.freeserve.co.uk</email>
+            <organization>The Sett Ltd.</organization>
+            <organizationUrl>http://www.thesett.com/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/rupertlssmith/unified_validation.git</connection>
+        <url>https://github.com/rupertlssmith/unified_validation.git</url>
+    </scm>
+    
     <properties>
         <jalopy.maven.plugin.version>1.9.4-250</jalopy.maven.plugin.version>
     </properties>
