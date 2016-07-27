@@ -1,4 +1,18 @@
-
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.model;
 
 import java.io.Serializable;
@@ -22,7 +36,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_NULL)
-public class JsonSchema implements Serializable {
+public class JsonSchema implements Serializable
+{
     /** Holds the title property. */
     protected String title;
 
@@ -93,7 +108,8 @@ public class JsonSchema implements Serializable {
     protected List<String> enums;
 
     /** No-arg constructor for serialization. */
-    public JsonSchema() {
+    public JsonSchema()
+    {
     }
 
     /**
@@ -101,7 +117,8 @@ public class JsonSchema implements Serializable {
      *
      * @return A builder to add properties to a schema.
      */
-    public static PropertyBuilder object() {
+    public static PropertyBuilder object()
+    {
         JsonSchema rootSchema = new JsonSchema().withType(SchemaType.OBJECT);
 
         return new PropertyBuilder(rootSchema, rootSchema);
@@ -112,7 +129,8 @@ public class JsonSchema implements Serializable {
      *
      * @param title The title property.
      */
-    public JsonSchema withTitle(String title) {
+    public JsonSchema withTitle(String title)
+    {
         this.title = title;
 
         return this;
@@ -123,7 +141,8 @@ public class JsonSchema implements Serializable {
      *
      * @param type The type property.
      */
-    public JsonSchema withType(SchemaType type) {
+    public JsonSchema withType(SchemaType type)
+    {
         this.type = type;
 
         return this;
@@ -134,7 +153,8 @@ public class JsonSchema implements Serializable {
      *
      * @param description The description property.
      */
-    public JsonSchema withDescription(String description) {
+    public JsonSchema withDescription(String description)
+    {
         this.description = description;
 
         return this;
@@ -145,7 +165,8 @@ public class JsonSchema implements Serializable {
      *
      * @param multipleOf The multipleOf property.
      */
-    public JsonSchema withMultipleOf(BigDecimal multipleOf) {
+    public JsonSchema withMultipleOf(BigDecimal multipleOf)
+    {
         this.multipleOf = multipleOf;
 
         return this;
@@ -156,7 +177,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maximum The maximum property.
      */
-    public JsonSchema withMaximum(BigDecimal maximum) {
+    public JsonSchema withMaximum(BigDecimal maximum)
+    {
         this.maximum = maximum;
 
         return this;
@@ -167,7 +189,8 @@ public class JsonSchema implements Serializable {
      *
      * @param exclusiveMaximum The exclusiveMaximum property.
      */
-    public JsonSchema withExclusiveMaximum(Boolean exclusiveMaximum) {
+    public JsonSchema withExclusiveMaximum(Boolean exclusiveMaximum)
+    {
         this.exclusiveMaximum = exclusiveMaximum;
 
         return this;
@@ -178,7 +201,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minimum The minimum property.
      */
-    public JsonSchema withMinimum(BigDecimal minimum) {
+    public JsonSchema withMinimum(BigDecimal minimum)
+    {
         this.minimum = minimum;
 
         return this;
@@ -189,7 +213,8 @@ public class JsonSchema implements Serializable {
      *
      * @param exclusiveMinimum The exclusiveMinimum property.
      */
-    public JsonSchema withExclusiveMinimum(Boolean exclusiveMinimum) {
+    public JsonSchema withExclusiveMinimum(Boolean exclusiveMinimum)
+    {
         this.exclusiveMinimum = exclusiveMinimum;
 
         return this;
@@ -200,7 +225,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxLength The maxLength property.
      */
-    public JsonSchema withMaxLength(Integer maxLength) {
+    public JsonSchema withMaxLength(Integer maxLength)
+    {
         this.maxLength = maxLength;
 
         return this;
@@ -211,7 +237,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minLength The minLength property.
      */
-    public JsonSchema withMinLength(Integer minLength) {
+    public JsonSchema withMinLength(Integer minLength)
+    {
         this.minLength = minLength;
 
         return this;
@@ -222,7 +249,8 @@ public class JsonSchema implements Serializable {
      *
      * @param pattern The pattern property.
      */
-    public JsonSchema withPattern(String pattern) {
+    public JsonSchema withPattern(String pattern)
+    {
         this.pattern = pattern;
 
         return this;
@@ -233,7 +261,8 @@ public class JsonSchema implements Serializable {
      *
      * @param items The items property.
      */
-    public JsonSchema withItems(List<JsonSchema> items) {
+    public JsonSchema withItems(List<JsonSchema> items)
+    {
         this.items = items;
 
         return this;
@@ -244,7 +273,8 @@ public class JsonSchema implements Serializable {
      *
      * @param additionalItems The additionalItems property.
      */
-    public JsonSchema withAdditionalItems(Boolean additionalItems) {
+    public JsonSchema withAdditionalItems(Boolean additionalItems)
+    {
         this.additionalItems = additionalItems;
 
         return this;
@@ -255,7 +285,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxItems The maxItems property.
      */
-    public JsonSchema withMaxItems(Integer maxItems) {
+    public JsonSchema withMaxItems(Integer maxItems)
+    {
         this.maxItems = maxItems;
 
         return this;
@@ -266,7 +297,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minItems The minItems property.
      */
-    public JsonSchema withMinItems(Integer minItems) {
+    public JsonSchema withMinItems(Integer minItems)
+    {
         this.minItems = minItems;
 
         return this;
@@ -277,7 +309,8 @@ public class JsonSchema implements Serializable {
      *
      * @param uniqueItems The uniqueItems property.
      */
-    public JsonSchema withUniqueItems(Integer uniqueItems) {
+    public JsonSchema withUniqueItems(Integer uniqueItems)
+    {
         this.uniqueItems = uniqueItems;
 
         return this;
@@ -288,7 +321,8 @@ public class JsonSchema implements Serializable {
      *
      * @param properties The properties property.
      */
-    public JsonSchema withProperties(Map<String, JsonSchema> properties) {
+    public JsonSchema withProperties(Map<String, JsonSchema> properties)
+    {
         this.properties = properties;
 
         return this;
@@ -299,7 +333,8 @@ public class JsonSchema implements Serializable {
      *
      * @param additionalProperties The additionalProperties property.
      */
-    public JsonSchema withAdditionalProperties(Boolean additionalProperties) {
+    public JsonSchema withAdditionalProperties(Boolean additionalProperties)
+    {
         this.additionalProperties = additionalProperties;
 
         return this;
@@ -310,7 +345,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxProperties The maxProperties property.
      */
-    public JsonSchema withMaxProperties(Integer maxProperties) {
+    public JsonSchema withMaxProperties(Integer maxProperties)
+    {
         this.maxProperties = maxProperties;
 
         return this;
@@ -321,7 +357,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minProperties The minProperties property.
      */
-    public JsonSchema withMinProperties(Integer minProperties) {
+    public JsonSchema withMinProperties(Integer minProperties)
+    {
         this.minProperties = minProperties;
 
         return this;
@@ -332,7 +369,8 @@ public class JsonSchema implements Serializable {
      *
      * @param required The required property.
      */
-    public JsonSchema withRequired(List<String> required) {
+    public JsonSchema withRequired(List<String> required)
+    {
         this.required = required;
 
         return this;
@@ -343,7 +381,8 @@ public class JsonSchema implements Serializable {
      *
      * @param patternProperties The patternProperties property.
      */
-    public JsonSchema withPatternProperties(List<String> patternProperties) {
+    public JsonSchema withPatternProperties(List<String> patternProperties)
+    {
         this.patternProperties = patternProperties;
 
         return this;
@@ -354,7 +393,8 @@ public class JsonSchema implements Serializable {
      *
      * @param enums The enums property.
      */
-    public JsonSchema withEnums(List<String> enums) {
+    public JsonSchema withEnums(List<String> enums)
+    {
         this.enums = enums;
 
         return this;
@@ -365,7 +405,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The title property.
      */
-    public String getTitle() {
+    public String getTitle()
+    {
         return title;
     }
 
@@ -374,7 +415,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The type property.
      */
-    public SchemaType getType() {
+    public SchemaType getType()
+    {
         return type;
     }
 
@@ -383,7 +425,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The description property.
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -392,7 +435,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The multipleOf property.
      */
-    public BigDecimal getMultipleOf() {
+    public BigDecimal getMultipleOf()
+    {
         return multipleOf;
     }
 
@@ -401,7 +445,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The maximum property.
      */
-    public BigDecimal getMaximum() {
+    public BigDecimal getMaximum()
+    {
         return maximum;
     }
 
@@ -410,7 +455,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The exclusiveMaximum property.
      */
-    public Boolean getExclusiveMaximum() {
+    public Boolean getExclusiveMaximum()
+    {
         return exclusiveMaximum;
     }
 
@@ -419,7 +465,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The minimum property.
      */
-    public BigDecimal getMinimum() {
+    public BigDecimal getMinimum()
+    {
         return minimum;
     }
 
@@ -428,7 +475,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The exclusiveMinimum property.
      */
-    public Boolean getExclusiveMinimum() {
+    public Boolean getExclusiveMinimum()
+    {
         return exclusiveMinimum;
     }
 
@@ -437,7 +485,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The maxLength property.
      */
-    public Integer getMaxLength() {
+    public Integer getMaxLength()
+    {
         return maxLength;
     }
 
@@ -446,7 +495,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The minLength property.
      */
-    public Integer getMinLength() {
+    public Integer getMinLength()
+    {
         return minLength;
     }
 
@@ -455,7 +505,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The pattern property.
      */
-    public String getPattern() {
+    public String getPattern()
+    {
         return pattern;
     }
 
@@ -464,7 +515,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The items property.
      */
-    public List<JsonSchema> getItems() {
+    public List<JsonSchema> getItems()
+    {
         return items;
     }
 
@@ -473,7 +525,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The additionalItems property.
      */
-    public Boolean getAdditionalItems() {
+    public Boolean getAdditionalItems()
+    {
         return additionalItems;
     }
 
@@ -482,7 +535,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The maxItems property.
      */
-    public Integer getMaxItems() {
+    public Integer getMaxItems()
+    {
         return maxItems;
     }
 
@@ -491,7 +545,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The minItems property.
      */
-    public Integer getMinItems() {
+    public Integer getMinItems()
+    {
         return minItems;
     }
 
@@ -500,7 +555,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The uniqueItems property.
      */
-    public Integer getUniqueItems() {
+    public Integer getUniqueItems()
+    {
         return uniqueItems;
     }
 
@@ -509,7 +565,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The properties property.
      */
-    public Map<String, JsonSchema> getProperties() {
+    public Map<String, JsonSchema> getProperties()
+    {
         return properties;
     }
 
@@ -518,7 +575,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The additionalProperties property.
      */
-    public Boolean getAdditionalProperties() {
+    public Boolean getAdditionalProperties()
+    {
         return additionalProperties;
     }
 
@@ -527,7 +585,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The maxProperties property.
      */
-    public Integer getMaxProperties() {
+    public Integer getMaxProperties()
+    {
         return maxProperties;
     }
 
@@ -536,7 +595,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The minProperties property.
      */
-    public Integer getMinProperties() {
+    public Integer getMinProperties()
+    {
         return minProperties;
     }
 
@@ -545,7 +605,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The required property.
      */
-    public List<String> getRequired() {
+    public List<String> getRequired()
+    {
         return required;
     }
 
@@ -554,7 +615,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The patternProperties property.
      */
-    public List<String> getPatternProperties() {
+    public List<String> getPatternProperties()
+    {
         return patternProperties;
     }
 
@@ -563,7 +625,8 @@ public class JsonSchema implements Serializable {
      *
      * @return The enums property.
      */
-    public List<String> getEnums() {
+    public List<String> getEnums()
+    {
         return enums;
     }
 
@@ -572,7 +635,8 @@ public class JsonSchema implements Serializable {
      *
      * @param title The title property.
      */
-    public void setTitle(String title) {
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
@@ -581,7 +645,8 @@ public class JsonSchema implements Serializable {
      *
      * @param type The type property.
      */
-    public void setType(SchemaType type) {
+    public void setType(SchemaType type)
+    {
         this.type = type;
     }
 
@@ -590,7 +655,8 @@ public class JsonSchema implements Serializable {
      *
      * @param description The description property.
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description = description;
     }
 
@@ -599,7 +665,8 @@ public class JsonSchema implements Serializable {
      *
      * @param multipleOf The multipleOf property.
      */
-    public void setMultipleOf(BigDecimal multipleOf) {
+    public void setMultipleOf(BigDecimal multipleOf)
+    {
         this.multipleOf = multipleOf;
     }
 
@@ -608,7 +675,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maximum The maximum property.
      */
-    public void setMaximum(BigDecimal maximum) {
+    public void setMaximum(BigDecimal maximum)
+    {
         this.maximum = maximum;
     }
 
@@ -617,7 +685,8 @@ public class JsonSchema implements Serializable {
      *
      * @param exclusiveMaximum The exclusiveMaximum property.
      */
-    public void setExclusiveMaximum(Boolean exclusiveMaximum) {
+    public void setExclusiveMaximum(Boolean exclusiveMaximum)
+    {
         this.exclusiveMaximum = exclusiveMaximum;
     }
 
@@ -626,7 +695,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minimum The minimum property.
      */
-    public void setMinimum(BigDecimal minimum) {
+    public void setMinimum(BigDecimal minimum)
+    {
         this.minimum = minimum;
     }
 
@@ -635,7 +705,8 @@ public class JsonSchema implements Serializable {
      *
      * @param exclusiveMinimum The exclusiveMinimum property.
      */
-    public void setExclusiveMinimum(Boolean exclusiveMinimum) {
+    public void setExclusiveMinimum(Boolean exclusiveMinimum)
+    {
         this.exclusiveMinimum = exclusiveMinimum;
     }
 
@@ -644,7 +715,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxLength The maxLength property.
      */
-    public void setMaxLength(Integer maxLength) {
+    public void setMaxLength(Integer maxLength)
+    {
         this.maxLength = maxLength;
     }
 
@@ -653,7 +725,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minLength The minLength property.
      */
-    public void setMinLength(Integer minLength) {
+    public void setMinLength(Integer minLength)
+    {
         this.minLength = minLength;
     }
 
@@ -662,7 +735,8 @@ public class JsonSchema implements Serializable {
      *
      * @param pattern The pattern property.
      */
-    public void setPattern(String pattern) {
+    public void setPattern(String pattern)
+    {
         this.pattern = pattern;
     }
 
@@ -671,7 +745,8 @@ public class JsonSchema implements Serializable {
      *
      * @param items The items property.
      */
-    public void setItems(List<JsonSchema> items) {
+    public void setItems(List<JsonSchema> items)
+    {
         this.items = items;
     }
 
@@ -680,7 +755,8 @@ public class JsonSchema implements Serializable {
      *
      * @param additionalItems The additionalItems property.
      */
-    public void setAdditionalItems(Boolean additionalItems) {
+    public void setAdditionalItems(Boolean additionalItems)
+    {
         this.additionalItems = additionalItems;
     }
 
@@ -689,7 +765,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxItems The maxItems property.
      */
-    public void setMaxItems(Integer maxItems) {
+    public void setMaxItems(Integer maxItems)
+    {
         this.maxItems = maxItems;
     }
 
@@ -698,7 +775,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minItems The minItems property.
      */
-    public void setMinItems(Integer minItems) {
+    public void setMinItems(Integer minItems)
+    {
         this.minItems = minItems;
     }
 
@@ -707,7 +785,8 @@ public class JsonSchema implements Serializable {
      *
      * @param uniqueItems The uniqueItems property.
      */
-    public void setUniqueItems(Integer uniqueItems) {
+    public void setUniqueItems(Integer uniqueItems)
+    {
         this.uniqueItems = uniqueItems;
     }
 
@@ -716,7 +795,8 @@ public class JsonSchema implements Serializable {
      *
      * @param properties The properties property.
      */
-    public void setProperties(Map<String, JsonSchema> properties) {
+    public void setProperties(Map<String, JsonSchema> properties)
+    {
         this.properties = properties;
     }
 
@@ -725,7 +805,8 @@ public class JsonSchema implements Serializable {
      *
      * @param additionalProperties The additionalProperties property.
      */
-    public void setAdditionalProperties(Boolean additionalProperties) {
+    public void setAdditionalProperties(Boolean additionalProperties)
+    {
         this.additionalProperties = additionalProperties;
     }
 
@@ -734,7 +815,8 @@ public class JsonSchema implements Serializable {
      *
      * @param maxProperties The maxProperties property.
      */
-    public void setMaxProperties(Integer maxProperties) {
+    public void setMaxProperties(Integer maxProperties)
+    {
         this.maxProperties = maxProperties;
     }
 
@@ -743,7 +825,8 @@ public class JsonSchema implements Serializable {
      *
      * @param minProperties The minProperties property.
      */
-    public void setMinProperties(Integer minProperties) {
+    public void setMinProperties(Integer minProperties)
+    {
         this.minProperties = minProperties;
     }
 
@@ -752,7 +835,8 @@ public class JsonSchema implements Serializable {
      *
      * @param required The required property.
      */
-    public void setRequired(List<String> required) {
+    public void setRequired(List<String> required)
+    {
         this.required = required;
     }
 
@@ -761,7 +845,8 @@ public class JsonSchema implements Serializable {
      *
      * @param patternProperties The patternProperties property.
      */
-    public void setPatternProperties(List<String> patternProperties) {
+    public void setPatternProperties(List<String> patternProperties)
+    {
         this.patternProperties = patternProperties;
     }
 
@@ -770,17 +855,20 @@ public class JsonSchema implements Serializable {
      *
      * @param enums The enums property.
      */
-    public void setEnums(List<String> enums) {
+    public void setEnums(List<String> enums)
+    {
         this.enums = enums;
     }
 
     /** Pretty printing for debugging purposes. */
-    public String toString() {
+    public String toString()
+    {
         return "JsonSchema: [ " + " ]";
     }
 
     /** Initialized the properties map. */
-    public void initProperties() {
+    public void initProperties()
+    {
         properties = new LinkedHashMap<>();
     }
 }

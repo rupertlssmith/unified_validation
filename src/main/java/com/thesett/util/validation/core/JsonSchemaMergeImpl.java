@@ -1,3 +1,18 @@
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.core;
 
 import java.util.LinkedHashMap;
@@ -16,9 +31,11 @@ import com.thesett.util.validation.model.JsonSchema;
  * <tr><td> Merge multiple json schemas together to form one schema. </td></tr>
  * </table></pre>
  */
-public class JsonSchemaMergeImpl implements JsonSchemaMerge {
+public class JsonSchemaMergeImpl implements JsonSchemaMerge
+{
     /** {@inheritDoc} */
-    public JsonSchema merge(JsonSchema schema1, JsonSchema schema2) {
+    public JsonSchema merge(JsonSchema schema1, JsonSchema schema2)
+    {
         JsonSchema result = JsonSchema.object().build();
 
         mergeInto(result, schema1);
@@ -28,11 +45,13 @@ public class JsonSchemaMergeImpl implements JsonSchemaMerge {
     }
 
     /** {@inheritDoc} */
-    public JsonSchema merge(JsonSchema... schemas) {
+    public JsonSchema merge(JsonSchema... schemas)
+    {
         return null;
     }
 
-    private void mergeInto(JsonSchema target, JsonSchema source) {
+    private void mergeInto(JsonSchema target, JsonSchema source)
+    {
         mergeDescription(target, source);
         mergeTitle(target, source);
         mergeType(target, source);
@@ -47,8 +66,10 @@ public class JsonSchemaMergeImpl implements JsonSchemaMerge {
         mergeRequiredFields(target, source);
 
         // Recursively merge in properties of objects.
-        if (source.getProperties() != null) {
-            for (Map.Entry<String, JsonSchema> entry : source.getProperties().entrySet()) {
+        if (source.getProperties() != null)
+        {
+            for (Map.Entry<String, JsonSchema> entry : source.getProperties().entrySet())
+            {
                 String propertyName = entry.getKey();
                 JsonSchema sourcePropertySchema = entry.getValue();
 
@@ -65,16 +86,21 @@ public class JsonSchemaMergeImpl implements JsonSchemaMerge {
      * @param sourceSchema The source schema to merge the property from.
      * @param targetSchema The target schema to merge the property into.
      */
-    private void mergeProperty(String propertyName, JsonSchema sourceSchema, JsonSchema targetSchema) {
-        if (targetSchema.getProperties() != null && targetSchema.getProperties().containsKey(propertyName)) {
+    private void mergeProperty(String propertyName, JsonSchema sourceSchema, JsonSchema targetSchema)
+    {
+        if ((targetSchema.getProperties() != null) && targetSchema.getProperties().containsKey(propertyName))
+        {
             JsonSchema targetPropertySchema = targetSchema.getProperties().get(propertyName);
 
             mergeInto(targetPropertySchema, sourceSchema);
-        } else {
+        }
+        else
+        {
             JsonSchema targetPropertySchema = JsonSchema.object().build();
             Map<String, JsonSchema> targetProperties = targetSchema.getProperties();
 
-            if (targetProperties == null) {
+            if (targetProperties == null)
+            {
                 targetProperties = new LinkedHashMap<>();
                 targetSchema.setProperties(targetProperties);
             }
@@ -85,13 +111,16 @@ public class JsonSchemaMergeImpl implements JsonSchemaMerge {
         }
     }
 
-    private void mergeRequiredFields(JsonSchema target, JsonSchema source) {
+    private void mergeRequiredFields(JsonSchema target, JsonSchema source)
+    {
         // Merge in any required fields.
         List<String> sourceRequired = source.getRequired();
         List<String> targetRequired = target.getRequired();
 
-        if (sourceRequired != null && !sourceRequired.isEmpty()) {
-            if (targetRequired == null) {
+        if ((sourceRequired != null) && !sourceRequired.isEmpty())
+        {
+            if (targetRequired == null)
+            {
                 targetRequired = new LinkedList<String>();
                 target.setRequired(targetRequired);
             }
@@ -100,70 +129,90 @@ public class JsonSchemaMergeImpl implements JsonSchemaMerge {
         }
     }
 
-    private void mergePattern(JsonSchema target, JsonSchema source) {
-        if (source.getPattern() != null) {
+    private void mergePattern(JsonSchema target, JsonSchema source)
+    {
+        if (source.getPattern() != null)
+        {
             target.setPattern(source.getPattern());
         }
     }
 
-    private void mergeExclusiveMinimum(JsonSchema target, JsonSchema source) {
-        if (source.getExclusiveMaximum() != null) {
+    private void mergeExclusiveMinimum(JsonSchema target, JsonSchema source)
+    {
+        if (source.getExclusiveMaximum() != null)
+        {
             target.setExclusiveMaximum(source.getExclusiveMaximum());
         }
     }
 
-    private void mergeExclusiveMaximum(JsonSchema target, JsonSchema source) {
-        if (source.getExclusiveMinimum() != null) {
+    private void mergeExclusiveMaximum(JsonSchema target, JsonSchema source)
+    {
+        if (source.getExclusiveMinimum() != null)
+        {
             target.setExclusiveMinimum(source.getExclusiveMinimum());
         }
     }
 
-    private void mergeMaximum(JsonSchema target, JsonSchema source) {
-        if (source.getMaximum() != null &&
-                ((target.getMaximum() != null && target.getMaximum().compareTo(source.getMaximum()) > 0) ||
-                    target.getMaximum() == null)) {
+    private void mergeMaximum(JsonSchema target, JsonSchema source)
+    {
+        if ((source.getMaximum() != null) &&
+                (((target.getMaximum() != null) && (target.getMaximum().compareTo(source.getMaximum()) > 0)) ||
+                    (target.getMaximum() == null)))
+        {
             target.setMaximum(source.getMaximum());
         }
     }
 
-    private void mergeMinimum(JsonSchema target, JsonSchema source) {
-        if (source.getMinimum() != null &&
-                ((target.getMinimum() != null && target.getMinimum().compareTo(source.getMinimum()) < 0) ||
-                    target.getMaxLength() == null)) {
+    private void mergeMinimum(JsonSchema target, JsonSchema source)
+    {
+        if ((source.getMinimum() != null) &&
+                (((target.getMinimum() != null) && (target.getMinimum().compareTo(source.getMinimum()) < 0)) ||
+                    (target.getMaxLength() == null)))
+        {
             target.setMinimum(source.getMinimum());
         }
     }
 
-    private void mergeMaxLength(JsonSchema target, JsonSchema source) {
-        if (source.getMaxLength() != null &&
-                ((target.getMaxLength() != null && target.getMaxLength() >= source.getMaxLength()) ||
-                    target.getMaxLength() == null)) {
+    private void mergeMaxLength(JsonSchema target, JsonSchema source)
+    {
+        if ((source.getMaxLength() != null) &&
+                (((target.getMaxLength() != null) && (target.getMaxLength() >= source.getMaxLength())) ||
+                    (target.getMaxLength() == null)))
+        {
             target.setMaxLength(source.getMaxLength());
         }
     }
 
-    private void mergeMinLength(JsonSchema target, JsonSchema source) {
-        if (source.getMinLength() != null &&
-                ((target.getMinLength() != null && target.getMinLength() <= source.getMinLength()) ||
-                    target.getMinLength() == null)) {
+    private void mergeMinLength(JsonSchema target, JsonSchema source)
+    {
+        if ((source.getMinLength() != null) &&
+                (((target.getMinLength() != null) && (target.getMinLength() <= source.getMinLength())) ||
+                    (target.getMinLength() == null)))
+        {
             target.setMinLength(source.getMinLength());
         }
     }
 
-    private void mergeType(JsonSchema target, JsonSchema source) {
-        if (source.getType() != null) {
+    private void mergeType(JsonSchema target, JsonSchema source)
+    {
+        if (source.getType() != null)
+        {
             target.setType(source.getType());
         }
     }
 
-    private void mergeTitle(JsonSchema target, JsonSchema source) {
-        if (source.getTitle() != null) {
+    private void mergeTitle(JsonSchema target, JsonSchema source)
+    {
+        if (source.getTitle() != null)
+        {
             target.setTitle(source.getTitle());
         }
     }
 
-    private void mergeDescription(JsonSchema target, JsonSchema source) {
-        if (source.getDescription() != null) {
+    private void mergeDescription(JsonSchema target, JsonSchema source)
+    {
+        if (source.getDescription() != null)
+        {
             target.setDescription(source.getDescription());
         }
     }

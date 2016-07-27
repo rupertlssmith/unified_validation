@@ -1,3 +1,18 @@
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.core;
 
 import javax.validation.Validator;
@@ -12,7 +27,8 @@ import com.thesett.util.validation.model.JsonSchema;
  * <tr><td> Extract a json schema from bean validation annotations. </td></tr>
  * </table></pre>
  */
-public interface BeanValidationToJsonSchema {
+public interface BeanValidationToJsonSchema
+{
     /**
      * Extracts a json schema from a class which has been annotated for validation.
      *

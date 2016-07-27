@@ -1,3 +1,18 @@
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.core;
 
 import java.lang.annotation.ElementType;
@@ -9,6 +24,8 @@ import java.util.Map;
 import javax.validation.ValidationException;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thesett.util.validation.model.JsonSchema;
+import com.thesett.util.validation.model.SchemaType;
 
 import org.hibernate.validator.cfg.context.PropertyConstraintMappingContext;
 import org.hibernate.validator.cfg.context.TypeConstraintMappingContext;
@@ -18,9 +35,6 @@ import org.hibernate.validator.cfg.defs.LengthDef;
 import org.hibernate.validator.cfg.defs.NotNullDef;
 import org.hibernate.validator.cfg.defs.PatternDef;
 import org.hibernate.validator.internal.cfg.DefaultConstraintMapping;
-
-import com.thesett.util.validation.model.JsonSchema;
-import com.thesett.util.validation.model.SchemaType;
 
 /**
  * JsonSchemaConstraintMapping translates a {@link JsonSchema} into a
@@ -32,7 +46,8 @@ import com.thesett.util.validation.model.SchemaType;
  * <tr><td> Map a json schema into bean validation constraints. </td></tr>
  * </table></pre>
  */
-class JsonSchemaConstraintMapping extends DefaultConstraintMapping {
+class JsonSchemaConstraintMapping extends DefaultConstraintMapping
+{
     /**
      * Adds constraints in a json schema to the mapping, against the specified class.
      *
@@ -40,29 +55,37 @@ class JsonSchemaConstraintMapping extends DefaultConstraintMapping {
      * @param jsonSchema The json schema to add constraints from.
      * @param <C>        The type of the class to add constraints to.
      */
-    public <C> void addSchema(Class<C> type, JsonSchema jsonSchema) {
+    public <C> void addSchema(Class<C> type, JsonSchema jsonSchema)
+    {
         TypeConstraintMappingContext<C> typeContext = type(type);
 
         // Scan all of the fields of the class being added to, to check if there are any @JsonProperty mappings,
         // translating field names between Java and JSON.
         Map<String, String> jsonToJava = new HashMap<>();
 
-        for (Field field : type.getDeclaredFields()) {
+        for (Field field : type.getDeclaredFields())
+        {
             JsonProperty annotation = field.getAnnotation(JsonProperty.class);
 
-            if (annotation != null) {
+            if (annotation != null)
+            {
                 jsonToJava.put(annotation.value(), field.getName());
             }
         }
 
-        if (jsonSchema.getProperties() != null) {
-            for (Map.Entry<String, JsonSchema> property : jsonSchema.getProperties().entrySet()) {
+        if (jsonSchema.getProperties() != null)
+        {
+            for (Map.Entry<String, JsonSchema> property : jsonSchema.getProperties().entrySet())
+            {
                 String jsonPropertyName = property.getKey();
                 String javaPropertyName;
 
-                if (jsonToJava.containsKey(jsonPropertyName)) {
+                if (jsonToJava.containsKey(jsonPropertyName))
+                {
                     javaPropertyName = jsonToJava.get(jsonPropertyName);
-                } else {
+                }
+                else
+                {
                     javaPropertyName = jsonPropertyName;
                 }
 
@@ -86,7 +109,8 @@ class JsonSchemaConstraintMapping extends DefaultConstraintMapping {
      * @param type             The type of the class that property constraints are being added to.
      */
     private void addConstraints(PropertyConstraintMappingContext propertyContext, String javaPropertyName,
-        String jsonPropertyName, JsonSchema value, Class type) {
+        String jsonPropertyName, JsonSchema value, Class type)
+    {
         convertMinimum(propertyContext, value);
         convertMaximum(propertyContext, value);
         convertMaxLength(propertyContext, value);
@@ -95,12 +119,16 @@ class JsonSchemaConstraintMapping extends DefaultConstraintMapping {
         convertTitle(propertyContext, value);
         convertDescription(propertyContext, value);
 
-        if (SchemaType.OBJECT.equals(value.getType())) {
+        if (SchemaType.OBJECT.equals(value.getType()))
+        {
             Class<?> fieldClass = null;
 
-            try {
+            try
+            {
                 fieldClass = type.getDeclaredField(javaPropertyName).getType();
-            } catch (NoSuchFieldException e) {
+            }
+            catch (NoSuchFieldException e)
+            {
                 throw new ValidationException("No matching field found with name: " + javaPropertyName, e);
             }
 
@@ -111,54 +139,70 @@ class JsonSchemaConstraintMapping extends DefaultConstraintMapping {
     }
 
     private void convertRequired(PropertyConstraintMappingContext propertyContext, String javaPropertyName,
-        String jsonPropertyName, JsonSchema jsonSchema) {
+        String jsonPropertyName, JsonSchema jsonSchema)
+    {
         List<String> required = jsonSchema.getRequired();
 
-        if (required != null && !required.isEmpty() && required.contains(jsonPropertyName)) {
+        if ((required != null) && !required.isEmpty() && required.contains(jsonPropertyName))
+        {
             propertyContext.constraint(new NotNullDef().message(" is mandatory."));
         }
     }
 
-    private void convertDescription(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getDescription() != null) {
+    private void convertDescription(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getDescription() != null)
+        {
             propertyContext.constraint(new DescriptionDef().description(value.getDescription()));
         }
     }
 
-    private void convertTitle(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getTitle() != null) {
+    private void convertTitle(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getTitle() != null)
+        {
             propertyContext.constraint(new TitleDef().title(value.getTitle()));
         }
     }
 
-    private void convertPattern(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getPattern() != null) {
+    private void convertPattern(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getPattern() != null)
+        {
             propertyContext.constraint(new PatternDef().regexp(value.getPattern()));
         }
     }
 
-    private void convertMinLength(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getMinLength() != null) {
+    private void convertMinLength(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getMinLength() != null)
+        {
             propertyContext.constraint(new LengthDef().min(value.getMinLength()));
         }
     }
 
-    private void convertMaxLength(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getMaxLength() != null) {
+    private void convertMaxLength(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getMaxLength() != null)
+        {
             propertyContext.constraint(new LengthDef().max(value.getMaxLength()));
         }
     }
 
-    private void convertMaximum(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getMaximum() != null) {
+    private void convertMaximum(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getMaximum() != null)
+        {
             boolean isInclusive = !Boolean.TRUE.equals(value.getExclusiveMaximum());
 
             propertyContext.constraint(new DecimalMaxDef().value(value.getMaximum().toString()).inclusive(isInclusive));
         }
     }
 
-    private void convertMinimum(PropertyConstraintMappingContext propertyContext, JsonSchema value) {
-        if (value.getMinimum() != null) {
+    private void convertMinimum(PropertyConstraintMappingContext propertyContext, JsonSchema value)
+    {
+        if (value.getMinimum() != null)
+        {
             boolean isInclusive = !Boolean.TRUE.equals(value.getExclusiveMinimum());
 
             propertyContext.constraint(new DecimalMinDef().value(value.getMinimum().toString()).inclusive(isInclusive));

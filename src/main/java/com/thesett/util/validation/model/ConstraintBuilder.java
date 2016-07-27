@@ -1,3 +1,18 @@
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.model;
 
 import java.math.BigDecimal;
@@ -12,7 +27,8 @@ import java.util.List;
  * <tr><td> Define field constraints. </td></tr>
  * </table></pre>
  */
-public class ConstraintBuilder extends PropertyBuilder {
+public class ConstraintBuilder extends PropertyBuilder
+{
     /** The schema for the field to add constraints to. */
     private final JsonSchema propertySchema;
 
@@ -28,129 +44,148 @@ public class ConstraintBuilder extends PropertyBuilder {
      * @param propertyName   The name of the property that this is building constraints for.
      */
     public ConstraintBuilder(JsonSchema rootSchema, JsonSchema parentSchema, JsonSchema propertySchema,
-        String propertyName) {
+        String propertyName)
+    {
         super(rootSchema, parentSchema);
         this.propertySchema = propertySchema;
         this.propertyName = propertyName;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder title(String title) {
+    public ConstraintBuilder title(String title)
+    {
         propertySchema.setTitle(title);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder description(String description) {
+    public ConstraintBuilder description(String description)
+    {
         propertySchema.setDescription(description);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder multipleOf(Number multiple) {
+    public ConstraintBuilder multipleOf(Number multiple)
+    {
         propertySchema.setMultipleOf(new BigDecimal(multiple.toString()));
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder maximum(Number max) {
+    public ConstraintBuilder maximum(Number max)
+    {
         propertySchema.setMaximum(new BigDecimal(max.toString()));
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder exclusiveMaximum(Boolean flag) {
+    public ConstraintBuilder exclusiveMaximum(Boolean flag)
+    {
         propertySchema.setExclusiveMaximum(flag);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder minimum(Number min) {
+    public ConstraintBuilder minimum(Number min)
+    {
         propertySchema.setMinimum(new BigDecimal(min.toString()));
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder exclusiveMinimum(Boolean flag) {
+    public ConstraintBuilder exclusiveMinimum(Boolean flag)
+    {
         propertySchema.setExclusiveMinimum(flag);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder maxLength(Integer max) {
+    public ConstraintBuilder maxLength(Integer max)
+    {
         propertySchema.setMaxLength(max);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder minLength(Integer min) {
+    public ConstraintBuilder minLength(Integer min)
+    {
         propertySchema.setMinLength(min);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder pattern(String pattern) {
+    public ConstraintBuilder pattern(String pattern)
+    {
         propertySchema.setPattern(pattern);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isArray() {
+    public ConstraintBuilder isArray()
+    {
         propertySchema.setType(SchemaType.ARRAY);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isBoolean() {
+    public ConstraintBuilder isBoolean()
+    {
         propertySchema.setType(SchemaType.BOOLEAN);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isInteger() {
+    public ConstraintBuilder isInteger()
+    {
         propertySchema.setType(SchemaType.INTEGER);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isNumber() {
+    public ConstraintBuilder isNumber()
+    {
         propertySchema.setType(SchemaType.NUMBER);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isNull() {
+    public ConstraintBuilder isNull()
+    {
         propertySchema.setType(SchemaType.NULL);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isString() {
+    public ConstraintBuilder isString()
+    {
         propertySchema.setType(SchemaType.STRING);
 
         return this;
     }
 
     /** @return This constraint builder. */
-    public ConstraintBuilder isRequired() {
+    public ConstraintBuilder isRequired()
+    {
         List<String> required = parentSchema.getRequired();
 
-        if (required == null) {
+        if (required == null)
+        {
             required = new LinkedList<String>();
             parentSchema.setRequired(required);
         }
@@ -165,7 +200,8 @@ public class ConstraintBuilder extends PropertyBuilder {
      *
      * @return A builder to add properties to a schema.
      */
-    public PropertyBuilder object() {
+    public PropertyBuilder object()
+    {
         propertySchema.setType(SchemaType.OBJECT);
 
         return new PropertyBuilder(rootSchema, propertySchema);

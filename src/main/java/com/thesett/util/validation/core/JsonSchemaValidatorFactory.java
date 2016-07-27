@@ -1,13 +1,28 @@
+/*
+ * Copyright The Sett Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.thesett.util.validation.core;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import com.thesett.util.validation.model.JsonSchema;
+
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.HibernateValidatorConfiguration;
-
-import com.thesett.util.validation.model.JsonSchema;
 
 /**
  * JsonSchemaValidatorFactory is a factory for building validators, built on top of Hibernate Bean Validator. In
@@ -25,27 +40,31 @@ import com.thesett.util.validation.model.JsonSchema;
  * <tr><td>  </td></tr>
  * </table></pre>
  */
-public class JsonSchemaValidatorFactory {
+public class JsonSchemaValidatorFactory
+{
     /**
      * Obtains a fresh builder to apply schemas to a class.
      *
      * @return A fresh builder to apply schemas to a class.
      */
-    public ValidatorBuilder getBuilder() {
+    public ValidatorBuilder getBuilder()
+    {
         return new ValidatorBuilder();
     }
 
     /**
      * Defines a builder for validators based on json schemas.
      */
-    public static class ValidatorBuilder {
+    public static class ValidatorBuilder
+    {
         /**
          * Holds a fresh validator configuration, so the schema does not conflict with others defined on the same class.
          */
         private final HibernateValidatorConfiguration config;
 
         /** Creates a fresh validator builder. */
-        public ValidatorBuilder() {
+        public ValidatorBuilder()
+        {
             config = Validation.byProvider(HibernateValidator.class).configure();
         }
 
@@ -58,7 +77,8 @@ public class JsonSchemaValidatorFactory {
          *
          * @return This builder for continuation.
          */
-        public <C> ValidatorBuilder addSchema(Class<C> type, JsonSchema schema) {
+        public <C> ValidatorBuilder addSchema(Class<C> type, JsonSchema schema)
+        {
             JsonSchemaConstraintMapping constraintMapping = new JsonSchemaConstraintMapping();
             constraintMapping.addSchema(type, schema);
 
@@ -72,7 +92,8 @@ public class JsonSchemaValidatorFactory {
          *
          * @return A validator instance configured with the json schemas on top of other validations.
          */
-        public Validator build() {
+        public Validator build()
+        {
             ValidatorFactory validatorFactory = config.buildValidatorFactory();
 
             return validatorFactory.getValidator();
