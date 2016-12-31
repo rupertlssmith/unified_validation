@@ -6,7 +6,7 @@
 
     <groupId>com.thesett.validation</groupId>
     <artifactId>unified-validation</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.9.125</version>
     <name>Unified Validation</name>
 
     <description>Unifying JSR303 and json-schema validation.</description>
